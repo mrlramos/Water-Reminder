@@ -1,0 +1,35 @@
+Pré-requisitos
+
+Node.js: Instale a versão LTS do site oficial.
+Angular CLI: Após instalar o Node.js, abra o Prompt de Comando e execute:
+.NET 8 SDK: Baixe e instale do site oficial da Microsoft.
+AWS CLI: Baixe e instale do site oficial da AWS.
+Git: Baixe e instale do site oficial.
+Conta AWS: Crie uma conta na AWS se ainda não tiver.
+
+Comandos de apoio:
+
+Angular -
+ng new water-reminder-frontend
+cd water-reminder-frontend
+cd src
+cd app
+mkdir components
+cd components
+ng g component reminder
+ng build --configuration production
+
+AWS CLI -
+aws s3api create-bucket --bucket water-reminder-frontend --region us-east-1
+
+# Configurando IndexDocument e ErrorDocument
+aws s3api put-bucket-website --bucket water-reminder-frontend --website-configuration file://website.json
+
+# Desativar bloqueio de acesso público
+aws s3api put-public-access-block --bucket water-reminder-frontend --public-access-block-configuration file://public_access_block.json
+
+# Definir a política de bucket para acesso público
+aws s3api put-bucket-policy --bucket water-reminder-frontend --policy file://policy.json
+
+# Publicação
+aws s3 sync ./dist/water-reminder-frontend/browser s3://water-reminder-frontend
