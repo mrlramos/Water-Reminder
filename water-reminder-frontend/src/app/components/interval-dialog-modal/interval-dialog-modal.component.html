@@ -1,0 +1,24 @@
+<h1 mat-dialog-title class="dialog-title">
+  <mat-icon aria-hidden="false" aria-label="Definir Intervalo">alarm</mat-icon>
+  Definir Intervalo
+</h1>
+<div mat-dialog-content class="dialog-content">
+  <mat-form-field appearance="fill">
+    <mat-label>Intervalo em minutos</mat-label>
+    <input matInput [(ngModel)]="interval" type="number" min="1" required>
+    <mat-error *ngIf="interval < 1 || !interval">
+      Por favor, insira um valor maior que zero.
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onConfirm()"
+    [disabled]="interval < 1"
+  >
+    Confirmar
+  </button>
+</div>

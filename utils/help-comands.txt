@@ -1,4 +1,4 @@
-Pré-requisitos
+Pré-requisitos:
 
 Node.js: Instale a versão LTS do site oficial.
 Angular CLI: Após instalar o Node.js, abra o Prompt de Comando e execute:
@@ -20,9 +20,10 @@ ng g component reminder
 ng build --configuration production
 
 AWS CLI -
+# Criar bucket
 aws s3api create-bucket --bucket water-reminder-frontend --region us-east-1
 
-# Configurando IndexDocument e ErrorDocument
+# Configurar IndexDocument e ErrorDocument
 aws s3api put-bucket-website --bucket water-reminder-frontend --website-configuration file://website.json
 
 # Desativar bloqueio de acesso público
@@ -31,5 +32,5 @@ aws s3api put-public-access-block --bucket water-reminder-frontend --public-acce
 # Definir a política de bucket para acesso público
 aws s3api put-bucket-policy --bucket water-reminder-frontend --policy file://policy.json
 
-# Publicação
+# Publicar
 aws s3 sync ./dist/water-reminder-frontend/browser s3://water-reminder-frontend
