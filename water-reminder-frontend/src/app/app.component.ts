@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { ReminderComponent } from './components/reminder/reminder.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,
-    ReminderComponent],
+    ReminderComponent,
+    MatDialogModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
