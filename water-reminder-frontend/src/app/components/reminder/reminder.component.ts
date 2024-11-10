@@ -1,29 +1,43 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { IntervalDialogModalComponent } from '../interval-dialog-modal/interval-dialog-modal.component';
 
 @Component({
   selector: 'app-reminder',
   standalone: true,
-  imports: [],
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    IntervalDialogModalComponent,
+  ],
   templateUrl: './reminder.component.html',
-  styleUrl: './reminder.component.scss'
+  styleUrls: ['./reminder.component.scss'],
 })
 export class ReminderComponent {
-    reminderInterval: any;
-    audio = new Audio('assets/reminder-sound.wav');
+  reminderInterval: any;
+  audio = new Audio('assets/reminder-sound.wav');
 
-    startReminder() {
-        const interval = prompt('Insira o intervalo de lembrete em minutos:', '60');
-        if (interval) {
-            const intervalMs = parseInt(interval) * 60000;
-            this.reminderInterval = setInterval(() => {
-            this.audio.play();
-            }, intervalMs);
-        }
-    }
+  constructor(private dialog: MatDialog) {}
 
-    stopReminder() {
-        if (this.reminderInterval) {
-            clearInterval(this.reminderInterval);
-        }
+  startReminder() {
+    const dialogRef = this.dialog.open(IntervalDialogModalComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const intervalMs = result * 60000;
+        this.reminderInterval = setInterval(() => {
+          this.audio.play();
+        }, intervalMs);
+      }
+    });
+  }
+
+  stopReminder() {
+    if (this.reminderInterval) {
+      clearInterval(this.reminderInterval);
     }
+  }
 }
