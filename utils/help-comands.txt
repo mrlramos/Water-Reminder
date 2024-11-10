@@ -34,3 +34,5 @@ aws s3api put-bucket-policy --bucket water-reminder-frontend --policy file://pol
 
 # Publicar
 aws s3 sync ./dist/water-reminder-frontend/browser s3://water-reminder-frontend
+
+ng add @angular/material
